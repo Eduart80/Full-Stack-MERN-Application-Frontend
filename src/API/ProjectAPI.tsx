@@ -25,6 +25,12 @@ export async function getAllProjects(){
         }
         return respond.data
     }catch(error: any){
-        console.log({message: error.message})
+        if (error.response) {
+            throw new DataError(`Server error: ${error.response.status}`);
+        } else if (error.request) {
+            throw new NetworkError('No response from server. Check CORS and backend.');
+        } else {
+            throw new Error(error.message);
+        }
     }
 }
