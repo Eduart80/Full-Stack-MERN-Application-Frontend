@@ -1,10 +1,9 @@
-import React from 'react'
-import NavBar from '../../Components/NavBar/NavBar'
+import NavBar from "../NavBar/NavBar";
 import { Link } from 'react-router-dom'
 
-export default function Project() {
+
+export default function dashboardComp() {
   return (
-   <>
     <div className='d-flex flex-column min-vh-100 bg-light'>
       <div className='w-100 ps-3'>
           <NavBar/>
@@ -30,20 +29,9 @@ export default function Project() {
                 <Link className="nav-link text-white" to="/Login">Login</Link></li>
             </ul>
           </aside>
-          {/* Main Section */}
-          <main className="col-md-9 col-lg-10 p-4 bg-white d-flex flex-column">
-            <h2>Your Projects</h2>
-            <div className="row mb-4">
-             <p>project Card 1</p>
-              </div>
-              <div className="col-md-4 mb-3">
-              <p>project card 2</p>
-              </div>
-              
-          </main>
+          
         </div>
       </div>
     </div>
-   </>
   )
 }
