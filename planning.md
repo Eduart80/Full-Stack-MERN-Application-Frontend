@@ -13,8 +13,8 @@ Frontend Project Plan (MERN Stack)
 	- Using Bootstrap
 
 3. Component Architecture
-	- Identify reusable components Button, Input, Modal, Pagem
-	- Plan page-level components, Home, Dashboard, Profile, tasks
+	- Identify reusable components Button, Input, Modal
+	- Plan page-level components, Home, Dashboard, Profile, tasks, Completed
 	- Define props and state for each component
 
 4. State Management
