@@ -8,9 +8,6 @@ export default function NavBar() {
     <nav className="navbar">
       <ul className="navbar-list">
         <li><NavLink to='/'>Dashboard</NavLink></li>
-        <li><NavLink to='/Project'>Projects</NavLink></li>
-        <li><NavLink to='/Tasks'>Tasks</NavLink></li>
-        <li><NavLink to='/Login'>Login</NavLink></li>
       </ul>
     </nav>
     </>

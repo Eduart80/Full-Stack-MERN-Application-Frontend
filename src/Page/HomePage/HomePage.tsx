@@ -4,15 +4,15 @@ import { Link } from 'react-router-dom'
 
 export default function HomePage() {
   return (
-    <div className='bg-light min-vh-100'>
-      <div className='w-100'>
-        <NavBar/>
+    <div className='d-flex flex-column min-vh-100 bg-light'>
+      <div className='w-100 ps-3'>
+          <NavBar/>
       </div>
       {/*Content */}
-      <div className='container-fluid'>
-        <div className="row" style={{ minHeight: 'calc(100vh - 56px)' }}>
+      <div className='container-fluid flex-fill d-flex flex-column p-0'>
+        <div className="row flex-fill g-0 m-0">
           {/* Sidebar */}
-          <aside className="col-md-3 col-lg-2 bg-dark text-white p-4 d-flex flex-column" style={{ minHeight: '100%' }}>
+          <aside className="col-md-3 col-lg-2 bg-dark text-white p-4 d-flex flex-column">
             <div className="mb-4">
               <div className="rounded-circle bg-secondary" style={{ width: 48, height: 48 }}></div>
               <div className="mt-2">User Name</div>
@@ -25,10 +25,12 @@ export default function HomePage() {
                 <Link className="nav-link text-white" to="/Tasks">Tasks</Link></li>
               <li className="nav-item">
                 <Link className="nav-link text-white" to="/Setting">Settings</Link></li>
+              <li className="nav-item">
+                <Link className="nav-link text-white" to="/Login">Login</Link></li>
             </ul>
           </aside>
           {/* Main Section */}
-          <main className="col-md-9 col-lg-10 p-4 bg-white" style={{ minHeight: '100%' }}>
+          <main className="col-md-9 col-lg-10 p-4 bg-white d-flex flex-column">
             <h2>Welcome to your Dashboard</h2>
             <div className="row mb-4">
               <div className="col-md-4 mb-3">
