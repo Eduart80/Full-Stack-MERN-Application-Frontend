@@ -1,26 +1,31 @@
 import { Routes, Route } from 'react-router-dom'
-import HomePage from './Page/HomePage/HomePage'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'
-import Project from './Page/Project/Project';
-import Tasks from './Page/Tasks/Tasks';
+import Dashboard from './Components/Dashboard/Dashboard';
+import HomePage from './Page/HomePage/HomePage'
+import Project from './Page/ProjectPage/ProjectPage';
+import TasksView from './Page/TasksPage/TasksView';
 import NotFound from './Page/NotFound/NotFound';
 import Login from './Page/Auth/Login'
 import SignUp from './Page/Auth/SignUp'
-import NavBar from './Components/NavBar/NavBar';
 
 function App() {
 
   return (
     <>
      <Routes>
-        <Route path='/' element={<HomePage />}/>
-        <Route path='/Project' element={<Project />}/>
-        <Route path='/Tasks' element={<Tasks />}/>
-        <Route path='*' element={<NotFound />}/>
-        <Route path='/login' element={<Login />}/>
-        <Route path='/signup' element={<SignUp />}/>
-     </Routes>
+        {/* Dashboard Layout with nested routes */}
+        <Route path='/' element={<Dashboard />}>
+          <Route index element={<HomePage />} />
+          <Route path='project' element={<Project />} />
+          <Route path='tasks' element={<TasksView />} />
+        </Route>
+        
+        {/* Auth routes */}
+        <Route path='/login' element={<Login />} />
+        <Route path='/signup' element={<SignUp />} />
+        <Route path='*' element={<NotFound />} />
+    </Routes>
     </>
   )
 }

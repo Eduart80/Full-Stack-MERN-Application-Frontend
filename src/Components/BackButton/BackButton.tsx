@@ -12,7 +12,7 @@ export default function BackButton() {
   return (
     <>
       <button className='btn' onClick={handleHome}>Home</button>
-      <button className='btn' onClick={handleBack}>Go Back</button>
+      <button className='btn' onClick={handleBack}>Back</button>
     </>
   )
 }

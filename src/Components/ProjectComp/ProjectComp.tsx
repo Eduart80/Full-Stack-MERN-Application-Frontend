@@ -1,0 +1,64 @@
+import { useState, useEffect } from "react";
+import { getAllProjects } from "../../API/ProjectAPI";
+import Spinner from "../Spinner/Spinner";
+
+interface Project {
+  _id: string;
+  name: string;
+  description: string;
+  status: string;
+  startDate: string;
+  endDate: string;
+  createdAt: string;
+}
+export default function ProjectComp() {
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    fetchProject();
+  }, []);
+
+  const fetchProject = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      const data = await getAllProjects();
+      setProjects(data);
+    } catch (err: any) {
+      setError(err.message || "Failed to fetch projects");
+      console.error("Error fetching projects:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (loading) {
+    return <Spinner />;
+  }
+  if (error) {
+    return <div className="alert alert-danger">{error}</div>;
+  }
+
+  return (
+    <div>
+      <h2>Projects</h2>
+      <div className="row">
+        {projects.map((project) => (
+          <div key={project._id} className="col-md-4 mb-3">
+            <div className="card">
+              <div className="card-body">
+                <h5 className="card-title">{project.name}</h5>
+                <p className="card-text">{project.description}</p>
+                <small className="text-muted">
+                  Created: {new Date(project.createdAt).toLocaleDateString()}
+                </small>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}

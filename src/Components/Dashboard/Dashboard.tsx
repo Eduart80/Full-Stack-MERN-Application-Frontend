@@ -1,5 +1,5 @@
 import NavBar from "../NavBar/NavBar";
-import { Link } from 'react-router-dom'
+import { Link, Outlet } from 'react-router-dom'
 
 
 export default function dashboardComp() {
@@ -29,7 +29,10 @@ export default function dashboardComp() {
                 <Link className="nav-link text-white" to="/Login">Login</Link></li>
             </ul>
           </aside>
-          
+          <main className="col-md-9 col-lg-10 p-4 bg-white d-flex flex-column">
+            {/* Children routes to render */}
+            <Outlet /> 
+          </main>
         </div>
       </div>
     </div>
