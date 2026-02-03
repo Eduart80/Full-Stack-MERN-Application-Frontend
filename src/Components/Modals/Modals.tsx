@@ -1,34 +1,68 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
-import { createProject } from "../../API/ProjectAPI";
+import { createProject, updateProject, type Project } from "../../API/ProjectAPI";
 
 interface CreateProjectModalProps {
   show: boolean;
   onHide: () => void;
   onProjectCreated: () => void;
+  editMode?: boolean;
+  projectToEdit?: Project;
 }
 
 export default function CreateProjectModal({
   show,
   onHide,
   onProjectCreated,
+  editMode = false, 
+  projectToEdit 
 }: CreateProjectModalProps) {
   const [name, setName] = useState("");
-  const [description, setDescription] = useState("")
-  const [startDate, setStartDate] = useState("")
-  const [endDate, setEndDate] = useState("")
-  const [loading, setLoading] = useState(false)
+  const [description, setDescription] = useState("");
+  const [status, setStatus] = useState("Pending");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (editMode && projectToEdit) {
+      setName(projectToEdit.name);
+      setDescription(projectToEdit.description);
+      setStatus(projectToEdit.status || "Pending");
+      setStartDate(projectToEdit.startDate || "");
+      setEndDate(projectToEdit.endDate || "");
+    } else {
+      // Reset form for create mode
+      setName("");
+      setDescription("");
+      setStatus("Pending");
+      setStartDate("");
+      setEndDate("");
+    }
+  }, [editMode, projectToEdit, show]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
     setLoading(true);
     try {
-      await createProject({ name, description, startDate, endDate });
+      const projectData = { 
+        name, 
+        description, 
+        status,
+        startDate: startDate || "", 
+        endDate: endDate || ""
+      }
+
+      if (editMode && projectToEdit) {
+        await updateProject(projectToEdit._id, projectData);
+      } else {
+        await createProject(projectData);
+      }
       setName("")
       setDescription("")
-      setStartDate("")
+      setStartDate("Pending")
       setEndDate("")
       onProjectCreated();
     } catch (err: any) {
@@ -38,10 +72,11 @@ export default function CreateProjectModal({
     }
   };
 
+
   return (
     <Modal show={show} onHide={onHide} centered>
       <Modal.Header closeButton>
-        <Modal.Title>Create New Project</Modal.Title>
+        <Modal.Title>{editMode? 'Edit Project' : 'Create New Project'}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         {error && (
@@ -73,6 +108,22 @@ export default function CreateProjectModal({
               required
               disabled={loading}
             />
+          </Form.Group>
+
+          <Form.Group className="mb-3">
+            <Form.Label>Status <span className="text-danger">*</span></Form.Label>
+            <Form.Select
+              value={status}
+              onChange={(e) => setStatus(e.target.value)}
+              required
+              disabled={loading}
+            >
+              <option value="Pending">Pending</option>
+              <option value="To Do">To Do</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Completed">Completed</option>
+              <option value="On Hold">On Hold</option>
+            </Form.Select>
           </Form.Group>
           
           <Form.Group className="mb-3">

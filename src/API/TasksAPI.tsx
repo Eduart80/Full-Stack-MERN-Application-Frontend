@@ -5,7 +5,7 @@ export interface Task {
     _id: string
     title: string
     description?: string
-    status: "pending" | "in-progress" | "completed"
+    status: 'To Do' | 'In Progress' | 'Done'
     createdAt?: string
     dueDate?: string
 }

@@ -15,7 +15,18 @@ apiClient.interceptors.request.use((config) => {
         config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
-});
+})
+
+export interface Project {
+    _id: string;
+    name: string;
+    description: string;
+    status?: string
+    startDate?: string;
+    endDate?: string;
+    createdAt?: string;
+    updatedAt?: string;
+}
 //GET ALL
 export async function getAllProjects(){
     try{
@@ -39,11 +50,51 @@ export async function getAllProjects(){
 export async function createProject(projectData: { 
     name: string; 
     description: string;
+    status?: string;
     startDate: string;
     endDate: string;
 }) {
     try {
         const response = await apiClient.post('/api/projects', projectData);
+        return response.data;
+    } catch (error: any) {
+        if (error.response) {
+            throw new DataError(`Server error: ${error.response.status}`);
+        } else if (error.request) {
+            throw new NetworkError('No response from server');
+        } else {
+            throw new Error(error.message);
+        }
+    }
+}
+
+
+// PUT
+export async function updateProject(id: string, projectData: { 
+    name: string; 
+    description: string;
+    status?: string;
+    startDate?: string;
+    endDate?: string;
+}) {
+    try {
+        const response = await apiClient.put(`/api/projects/${id}`, projectData);
+        return response.data;
+    } catch (error: any) {
+        if (error.response) {
+            throw new DataError(`Server error: ${error.response.status}`);
+        } else if (error.request) {
+            throw new NetworkError('No response from server');
+        } else {
+            throw new Error(error.message);
+        }
+    }
+}
+
+// DELETE
+export async function deleteProject(id: string) {
+    try {
+        const response = await apiClient.delete(`/api/projects/${id}`);
         return response.data;
     } catch (error: any) {
         if (error.response) {

@@ -1,13 +1,19 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
 
 interface TaskModalProps {
   show: boolean;
   onHide: () => void;
   onTaskCreated: () => void;
   projectId: string;
+  editMode?: boolean;
+  taskToEdit?: {
+    _id: string;
+    title: string;
+    description: string;
+    status: string;
+  };
 }
 
 interface TaskFormData {
@@ -16,7 +22,7 @@ interface TaskFormData {
   status: string;
 }
 
-export default function TaskModal({ show, onHide, onTaskCreated, projectId }: TaskModalProps) {
+export default function TaskModal({ show, onHide, onTaskCreated, projectId, editMode = false, taskToEdit }: TaskModalProps) {
   const [formData, setFormData] = useState<TaskFormData>({
     title: '',
     description: '',
@@ -24,6 +30,18 @@ export default function TaskModal({ show, onHide, onTaskCreated, projectId }: Ta
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+
+  useEffect(() => {
+    if (editMode && taskToEdit) {
+      setFormData({
+        title: taskToEdit.title,
+        description: taskToEdit.description,
+        status: taskToEdit.status
+      });
+    } else {
+      setFormData({ title: '', description: '', status: 'To Do' });
+    }
+  }, [editMode, taskToEdit]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -40,19 +58,35 @@ export default function TaskModal({ show, onHide, onTaskCreated, projectId }: Ta
 
     try {
       const token = localStorage.getItem('token');
-       await axios.post(
-        `${import.meta.env.VITE_API_URL}/api/projects/${projectId}/tasks`, 
-        formData,
-        {
-          headers: {
-            'Authorization': `Bearer ${token}`
+      
+      if (editMode && taskToEdit) {
+        // Update existing task
+        await axios.put(
+          `${import.meta.env.VITE_API_URL}/api/tasks/${taskToEdit._id}`,
+          formData,
+          {
+            headers: {
+              'Authorization': `Bearer ${token}`
+            }
           }
-        }
-      )
+        );
+      } else {
+        // Create new task
+        await axios.post(
+          `${import.meta.env.VITE_API_URL}/api/projects/${projectId}/tasks`, 
+          formData,
+          {
+            headers: {
+              'Authorization': `Bearer ${token}`
+            }
+          }
+        );
+      }
+      
       setFormData({ title: '', description: '', status: 'To Do' });
       onTaskCreated();
     } catch (err: any) {
-      setError(err.response?.data?.message || 'Failed to create task');
+      setError(err.response?.data?.message || `Failed to ${editMode ? 'update' : 'create'} task`);
     } finally {
       setLoading(false);
     }
@@ -67,7 +101,7 @@ export default function TaskModal({ show, onHide, onTaskCreated, projectId }: Ta
   return (
     <Modal show={show} onHide={handleClose} centered>
       <Modal.Header closeButton>
-        <Modal.Title>Create New Task</Modal.Title>
+        <Modal.Title>{editMode ? 'Edit Task' : 'Create New Task'}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         {error && (
@@ -120,7 +154,7 @@ export default function TaskModal({ show, onHide, onTaskCreated, projectId }: Ta
           Cancel
         </Button>
         <Button variant="primary" onClick={handleSubmit} disabled={loading}>
-          {loading ? 'Creating...' : 'Create Task'}
+          {loading ? (editMode ? 'Updating...' : 'Creating...') : (editMode ? 'Update Task' : 'Create Task')}
         </Button>
       </Modal.Footer>
     </Modal>
