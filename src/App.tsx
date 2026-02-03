@@ -8,7 +8,7 @@ import TasksView from './Page/TasksPage/TasksView';
 import NotFound from './Page/NotFound/NotFound';
 import Login from './Page/Auth/Login'
 import SignUp from './Page/Auth/SignUp'
-import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute';
+import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute'
 
 function App() {
 

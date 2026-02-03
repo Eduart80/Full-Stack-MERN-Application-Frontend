@@ -79,6 +79,11 @@ export default function Login() {
           </div>
         </div>
       </div>
+      <div>
+        {/* ToDo css */}
+            <h2>Task Management App</h2>
+          <p>created by Eduart Zina</p>
+      </div>
     </div>
   )
 }

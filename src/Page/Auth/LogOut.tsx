@@ -6,7 +6,7 @@ export default function LogOut(){
     const navigate = useNavigate()
     useEffect(()=>{
         logout()
-        navigate('/')
+        navigate('/login')
     },[])
     return (
         <>
