@@ -1,8 +1,16 @@
 import NavBar from "../NavBar/NavBar";
 import { Link, Outlet } from 'react-router-dom'
+import { useState, useEffect } from 'react'
 
 
 export default function dashboardComp() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+
+  useEffect(() => {
+    // Check user status
+    const token = localStorage.getItem('token')
+    setIsLoggedIn(!!token)
+  }, [])
   return (
     <div className='d-flex flex-column min-vh-100 bg-light'>
       <div className='w-100 ps-3'>
@@ -26,7 +34,12 @@ export default function dashboardComp() {
               <li className="nav-item">
                 <Link className="nav-link text-white" to="/Setting">Settings</Link></li>
               <li className="nav-item">
-                <Link className="nav-link text-white" to="/Login">Login</Link></li>
+                {isLoggedIn ? (
+                  <Link className="nav-link text-white" to="/">Logout</Link>
+                ) : (
+                  <Link className="nav-link text-white" to="/login">Login</Link>
+                )}
+              </li>
             </ul>
           </aside>
           <main className="col-md-9 col-lg-10 p-4 bg-white d-flex flex-column">
