@@ -8,7 +8,7 @@ export default function dashboardComp() {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [userName, setUserName] = useState('Guest')
   const { theme, toggleTheme } = useTheme()
-
+ 
   useEffect(() => {
     const token = localStorage.getItem('token')
     const userLocal = localStorage.getItem('user')
@@ -21,7 +21,7 @@ export default function dashboardComp() {
         storedUserName = 'Guest'
       }
     }
-    
+   
     setIsLoggedIn(!!token)
     setUserName(storedUserName)
   }, [userName])

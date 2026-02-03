@@ -1,2 +1,6 @@
 cors issue with not conectiong correclty, back end with fetch from React
 light and dark theme, components do not respond to the comand
+when status of task get updated as project status and no logic work
+i had to go over many times from project api, modals and input and output, diferent situations but no eyes to see,
+that the issue was me changing status for tasks instead of project, so i endeed up loosing time just debugging for 
+a small mistake.

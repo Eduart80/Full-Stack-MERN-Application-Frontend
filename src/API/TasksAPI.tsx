@@ -8,6 +8,8 @@ export interface Task {
     status: 'To Do' | 'In Progress' | 'Done'
     createdAt?: string
     dueDate?: string
+    completed?: boolean;
+    projectId: string;
 }
 
 const apiClient = axios.create({
@@ -41,3 +43,7 @@ export async function getAllTasks(projectId:string):Promise<Task[]> {
         }
     }
 }
+export const getTasksByProject = async (projectId: string): Promise<Task[]> => {
+  const response = await apiClient.get(`/api/projects/${projectId}/tasks`);
+  return response.data;
+};
