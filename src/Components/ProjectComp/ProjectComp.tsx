@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { getAllProjects } from "../../API/ProjectAPI";
 import Spinner from "../Spinner/Spinner";
+import { Link } from "react-router-dom";
 
 interface Project {
   _id: string;
@@ -45,7 +46,8 @@ export default function ProjectComp() {
     <div>
       <div className="row">
         {projects.map((project) => (
-          <div key={project._id} className="col-md-7 mb-3">
+          <Link key={project._id} to={`/projects/${project._id}/tasks`} className="text-decoration-none text-dark">
+          <div className="col-md-7 mb-3">
             <div className="card">
               <div className="card-body">
                 <h5 className="card-title">Title {project.name}</h5>
@@ -57,6 +59,7 @@ export default function ProjectComp() {
               </div>
             </div>
           </div>
+          </Link>
         ))}
       </div>
     </div>

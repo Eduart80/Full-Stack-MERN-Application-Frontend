@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import ProjectComp from '../../Components/ProjectComp/ProjectComp'
 import CreateProjectModal from '../../Components/Modals/Modals'
-
+import BackButton from '../../Components/BackButton/BackButton' 
 
 export default function Project() {
   const [showCreateModal, setShowCreateModal]=useState(false)
@@ -13,8 +13,11 @@ export default function Project() {
   }
   return (
    <>
+   <div className="d-flex align-items-center">
+    <BackButton />
+   </div>
     {/* Main Section */}
-    <main className="col-md-9 col-lg-10 p-4 bg-white d-flex flex-column">
+    <main className="col-md-9 col-lg-12 p-4 bg-white d-flex flex-column">
       <div className="d-flex justify-content-between align-items-center mb-3">
         <h2>Your Projects</h2>
         <button className="btn btn-primary" onClick={() => setShowCreateModal(true)}>
