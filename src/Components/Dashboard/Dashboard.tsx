@@ -26,6 +26,12 @@ export default function dashboardComp() {
     setUserName(storedUserName)
   }, [userName])
 
+  const handleLogOut = ()=>{
+    localStorage.clear()
+    setIsLoggedIn(false)
+    setUserName('Guest')
+  }
+
   return (
     <div className='d-flex flex-column min-vh-100 bg-light'>
       <div className='w-100 ps-3'>
@@ -50,7 +56,10 @@ export default function dashboardComp() {
                 <Link className="nav-link text-white" to="/Setting">Settings</Link></li>
               <li className="nav-item">
                 {isLoggedIn ? (
-                  <Link className="nav-link text-white" to="/login">Logout</Link>
+                  <Link className="nav-link text-white"
+                   to="/login"
+                   onClick={handleLogOut}
+                   >Logout</Link>
                 ) : (
                   <Link className="nav-link text-white" to="/login">Login</Link>
                 )}
