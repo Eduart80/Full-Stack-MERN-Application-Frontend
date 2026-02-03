@@ -8,6 +8,7 @@ import TasksView from './Page/TasksPage/TasksView';
 import NotFound from './Page/NotFound/NotFound';
 import Login from './Page/Auth/Login'
 import SignUp from './Page/Auth/SignUp'
+import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute';
 
 function App() {
 
@@ -15,7 +16,11 @@ function App() {
     <>
      <Routes>
         {/* Dashboard Layout with nested routes */}
-        <Route path='/' element={<Dashboard />}>
+        <Route path='/' element={
+            <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+          }>
           <Route index element={<HomePage />} />
           <Route path='project' element={<Project />} />
           <Route path='tasks' element={<TasksView />} />

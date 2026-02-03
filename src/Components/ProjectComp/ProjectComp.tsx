@@ -43,14 +43,14 @@ export default function ProjectComp() {
 
   return (
     <div>
-      <h2>Projects</h2>
       <div className="row">
         {projects.map((project) => (
-          <div key={project._id} className="col-md-4 mb-3">
+          <div key={project._id} className="col-md-7 mb-3">
             <div className="card">
               <div className="card-body">
-                <h5 className="card-title">{project.name}</h5>
-                <p className="card-text">{project.description}</p>
+                <h5 className="card-title">Title {project.name}</h5>
+                <p className="card-text">Description: {project.description}</p>
+                <p className="card-text">Status: {project.status}</p>
                 <small className="text-muted">
                   Created: {new Date(project.createdAt).toLocaleDateString()}
                 </small>

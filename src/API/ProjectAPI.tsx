@@ -16,19 +16,40 @@ apiClient.interceptors.request.use((config) => {
     }
     return config;
 });
-
+//GET ALL
 export async function getAllProjects(){
     try{
-        const respond = await axios(`${import.meta.env.VITE_API_URL}/api/projects`)
-        if(!respond){
+        const response = await apiClient.get('/api/projects')
+        if(!response){
             throw new NetworkError
         }
-        return respond.data
+        return response.data
     }catch(error: any){
         if (error.response) {
             throw new DataError(`Server error: ${error.response.status}`);
         } else if (error.request) {
             throw new NetworkError('No response from server. Check CORS and backend.');
+        } else {
+            throw new Error(error.message);
+        }
+    }
+}
+
+// POST
+export async function createProject(projectData: { 
+    name: string; 
+    description: string;
+    startDate: string;
+    endDate: string;
+}) {
+    try {
+        const response = await apiClient.post('/api/projects', projectData);
+        return response.data;
+    } catch (error: any) {
+        if (error.response) {
+            throw new DataError(`Server error: ${error.response.status}`);
+        } else if (error.request) {
+            throw new NetworkError('No response from server');
         } else {
             throw new Error(error.message);
         }
