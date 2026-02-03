@@ -62,9 +62,6 @@ export default function TasksView() {
                 <div className="card-body">
                   <h5 className="card-title">{task.title}</h5>
                   <p className="card-text">{task.description}</p>
-                  {/* <p className="card-text">
-                    <strong>Project:</strong> {task.project}
-                  </p> */}
                   <p className="card-text">
                     <span className={`badge bg-${getStatusBadge(task.status)}`}>
                       {task.status}

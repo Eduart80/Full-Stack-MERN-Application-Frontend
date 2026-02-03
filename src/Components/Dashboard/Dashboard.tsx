@@ -1,18 +1,30 @@
 import NavBar from "../NavBar/NavBar";
 import { Link, Outlet } from 'react-router-dom'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, use } from 'react'
 import { useTheme } from "../../Context/ThemeContext";
 
 
 export default function dashboardComp() {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [userName, setUserName] = useState('Guest')
   const { theme, toggleTheme } = useTheme()
 
   useEffect(() => {
-    // Check user status
     const token = localStorage.getItem('token')
+    const userLocal = localStorage.getItem('user')
+    let storedUserName = 'Guest'
+    if (userLocal) {
+      try {
+        const user = JSON.parse(userLocal)
+        storedUserName = user.username || 'Guest'
+      } catch (e) {
+        storedUserName = 'Guest'
+      }
+    }
+    
     setIsLoggedIn(!!token)
-  }, [])
+    setUserName(storedUserName)
+  }, [userName])
 
   return (
     <div className='d-flex flex-column min-vh-100 bg-light'>
@@ -26,8 +38,8 @@ export default function dashboardComp() {
           <aside className="col-md-3 col-lg-2 bg-dark text-white p-4 d-flex flex-column">
             <div className="mb-4">
               <div className="rounded-circle bg-secondary" style={{ width: 48, height: 48 }}></div>
-              <div className="mt-2">User Name</div>
-              <div className="text-success small">Online</div>
+              <div className="mt-2">{userName}</div>
+              <div className="text-success small">{userName? 'Online': 'Offline'}</div>
             </div>
             <ul className="nav flex-column">
               <li className="nav-item mb-2">
