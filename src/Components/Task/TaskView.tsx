@@ -102,17 +102,14 @@ export default function TasksView() {
                   <h5 className="card-title">{task.title}</h5>
                   <p className="card-text">{task.description}</p>
                   <p className="card-text">
-                    <span className={`badge bg-${getStatusBadge(task.status)}`}>
+                    Status:
+                    <span className={`badge bg-${getStatusBadge(task.status)} ms-2`}>
                       {task.status}
                     </span>
                   </p>
-                  {task.createdAt && (
-                    <small className="text-body-secondary d-block mb-2">
-                      Created: {new Date(task.createdAt).toLocaleDateString()}
-                    </small>
-                  )}
                   <div className="d-flex gap-2">
-                    {/* Show Pass/Fail dropdown as an option for every task */}
+                    Test result:
+                    {/**Fake pass fail selection */}
                     <TaskPassFail showOptions={true} />
                   </div>
                   <div className="d-flex gap-2">
@@ -131,6 +128,11 @@ export default function TasksView() {
                       Delete
                     </button>
                   </div>
+                  {task.createdAt && (
+                    <small className="text-body-secondary d-block mb-2 mt-2">
+                      Created: {new Date(task.createdAt).toLocaleDateString()}
+                    </small>
+                  )}
                 </div>
               </div>
             </div>

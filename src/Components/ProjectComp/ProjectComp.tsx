@@ -23,7 +23,6 @@ export default function ProjectComp() {
       setLoading(true);
       setError(null);
       const data = await getAllProjects();
-      console.log('Fetched projects:', data); // DEBUG
       setProjects(data);
     } catch (err: any) {
       setError(err.message || "Failed to fetch projects");
@@ -32,7 +31,7 @@ export default function ProjectComp() {
       setLoading(false);
     }
   }
-
+// Delete
   const handleDelete = async (projectId: string) => {
     if (!window.confirm("Are you sure you want to delete this project?")) {
       return;
@@ -86,11 +85,7 @@ export default function ProjectComp() {
                 <p className="card-text">Description: {project.description}</p>
                 <p className="card-text">Status: {project.status}</p>
                 
-                {project.createdAt && (
-                    <small className="text-body-secondary d-block mb-2">
-                      Created: {new Date(project.createdAt).toLocaleDateString()}
-                    </small>
-                  )}
+                
                   <div className="d-flex gap-2 flex-wrap">
                     <Link
                       to={`/projects/${project._id}/tasks`}
@@ -114,6 +109,11 @@ export default function ProjectComp() {
                         Delete
                     </button>
                   </div>
+                  {project.createdAt && (
+                    <small className="text-body-secondary d-block mb-2 mt-2">
+                      Created: {new Date(project.createdAt).toLocaleDateString()}
+                    </small>
+                  )}
               </div>
             </div>
           </div>
