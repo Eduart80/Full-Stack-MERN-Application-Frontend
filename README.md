@@ -66,7 +66,12 @@ TaskMaster is a full-stack project management application built with the MERN st
 - The backend is deployed as a Web Service on Render, connected to MongoDB Atlas.
 - The frontend is deployed as a Static Site on Render.
 
-### Live Web Project [Link]()
+### Live Web Project [Link](https://full-stack-mern-application-frontend.onrender.com)
+
+## Documentation
+
+Planning documentation: [Planning](./planning.md).<br>
+For detailed API endpoints and usage, see the [API Documentation](./API_Documentation.md)
 
 ## Folder Structure
 
@@ -74,10 +79,6 @@ TaskMaster is a full-stack project management application built with the MERN st
 /backend      # Express API
 /frontend     # React app
 ```
-## Documentation
-
-Planning documentation: [Planning](./planning.md).<br>
-For detailed API endpoints and usage, see the [API Documentation](./API_Documentation.md)
 
 ## Main Pages
 

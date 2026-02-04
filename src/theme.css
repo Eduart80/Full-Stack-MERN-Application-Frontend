@@ -113,7 +113,7 @@ textarea::placeholder {
 }
 
 .table-hover > tbody > tr:hover {
-  --bs-table-hover-bg: var(--bg-secondary) !important;
+  background-color: #3e3e3e !important; 
   color: var(--text-primary) !important;
 }
 
