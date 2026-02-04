@@ -1,16 +1,8 @@
 import axios from "axios"
 import { NetworkError, DataError } from "../Components/ErrorMessage/ErrorMessage";
 
-export interface Task {
-    _id: string
-    title: string
-    description?: string
-    status: 'To Do' | 'In Progress' | 'Done'
-    createdAt?: string
-    dueDate?: string
-    completed?: boolean;
-    projectId: string;
-}
+import type { Task }  from '../types/index';
+
 
 const apiClient = axios.create({
     baseURL: import.meta.env.VITE_API_URL,

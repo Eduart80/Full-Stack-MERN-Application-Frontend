@@ -11,8 +11,8 @@ export default function BackButton() {
     }
   return (
     <>
-      <button className='btn' onClick={handleBack}>Back</button>
-      <button className='btn' onClick={handleHome}>Home</button>
+      <button className='btn btn-outline-secondary me-2' onClick={handleBack}>Back</button>
+      <button className='btn btn-outline-primary' onClick={handleHome}>Home</button>
     </>
   )
 }

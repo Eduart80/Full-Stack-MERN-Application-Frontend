@@ -1,6 +1,6 @@
 import NavBar from "../NavBar/NavBar";
 import { Link, Outlet } from 'react-router-dom'
-import { useState, useEffect, use } from 'react'
+import { useState, useEffect } from 'react'
 import { useTheme } from "../../Context/ThemeContext";
 
 
@@ -33,7 +33,7 @@ export default function dashboardComp() {
   }
 
   return (
-    <div className='d-flex flex-column min-vh-100 bg-light'>
+    <div className='d-flex flex-column min-vh-100 theme-container'>
       <div className='w-100 ps-3'>
           <NavBar/>
       </div>
@@ -41,7 +41,7 @@ export default function dashboardComp() {
       <div className='container-fluid flex-fill d-flex flex-column p-0'>
         <div className="row flex-fill g-0 m-0">
           {/* Sidebar */}
-          <aside className="col-md-3 col-lg-2 bg-dark text-white p-4 d-flex flex-column">
+          <aside className="col-md-3 col-lg-2 theme-sidebar p-4 d-flex flex-column">
             <div className="mb-4">
               <div className="rounded-circle bg-secondary" style={{ width: 48, height: 48 }}></div>
               <div className="mt-2">{userName}</div>
@@ -76,7 +76,7 @@ export default function dashboardComp() {
               </li>
             </ul>
           </aside>
-          <main className="col-md-9 col-lg-10 p-4 bg-white d-flex flex-column">
+          <main className="col-md-9 col-lg-10 p-4 theme-main d-flex flex-column">
             {/* Children routes to render */}
             <Outlet /> 
           </main>

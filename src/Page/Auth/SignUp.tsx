@@ -15,6 +15,23 @@ export default function SignUp() {
     e.preventDefault()
     setError(null)
 
+    // Validate username
+    if (!username || username.trim().length === 0) {
+      setError('Username is required')
+      return
+    }
+
+    if (username.length < 3) {
+      setError('Username must be at least 3 characters long')
+      return
+    }
+
+    // Validate email
+    if (!email || email.trim().length === 0) {
+      setError('Email is required')
+      return
+    }
+
     // Validate password match
     if (password !== confirmPassword) {
       setError('Passwords do not match')
@@ -30,19 +47,20 @@ export default function SignUp() {
     setLoading(true)
 
     try {
-      await register(username, email, password)
+      await register(username.trim(), email.trim(), password)
       navigate('/')
     } catch (err: any) {
-      setError(err.message)
+      setError(err.message || 'Registration failed. Please try again.')
     } finally {
       setLoading(false)
     }
   }
 
   return (
-    <div className="container mt-5">
-      <div className="row justify-content-center">
-        <div className="col-md-6">
+    <div className="min-vh-100 theme-container">
+      <div className="container mt-5">
+        <div className="row justify-content-center">
+          <div className="col-md-6">
           <div className="card">
             <div className="card-body">
               <h2 className="card-title text-center mb-4">Sign Up</h2>
@@ -120,6 +138,7 @@ export default function SignUp() {
           </div>
         </div>
       </div>
+    </div>
     </div>
   )
 }

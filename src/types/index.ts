@@ -1,13 +1,14 @@
-import api from './axiosConfig';
 
 export interface Task {
   _id: string;
   title: string;
-  description: string;
+  description?: string;
   status: string;
   completed?: boolean;
   createdAt?: string;
   updatedAt?: string;
+  dueDate?: string;
+  projectId?: string;
 }
 
 export interface Project {

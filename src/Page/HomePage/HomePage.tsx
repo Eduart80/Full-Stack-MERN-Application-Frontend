@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { getAllProjects } from '../../API/ProjectAPI';
 import { getTasksByProject } from '../../API/TasksAPI';
@@ -31,21 +31,18 @@ export default function HomePage() {
        const taskPromises = projects.map((project: any) => 
         getTasksByProject(project._id).catch(err => {
           console.error(`Error fetching tasks for project ${project._id}:`, err);
-          return []; // Return empty array if error
+          return []
         })
       );
       
       const allTasksArrays = await Promise.all(taskPromises);
-      
-      // Count tasks from all projects
+    
       allTasksArrays.forEach((tasks: Task[]) => {
         totalTasks += tasks.length;
         completedTasks += tasks.filter((task: Task) => 
           task.status === 'Done' || task.completed === true
         ).length;
-      });
-      
-      console.log('Stats:', { totalProjects, totalTasks, completedTasks }); // DEBUG
+      })
       
         
         setStats({

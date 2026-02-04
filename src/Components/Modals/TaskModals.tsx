@@ -22,6 +22,7 @@ interface TaskFormData {
   status: string;
 }
 
+///////// TASK /////////
 export default function TaskModal({ show, onHide, onTaskCreated, projectId, editMode = false, taskToEdit }: TaskModalProps) {
   const [formData, setFormData] = useState<TaskFormData>({
     title: '',

@@ -6,6 +6,9 @@
   --text-secondary: #6c757d;
   --text-white: #ffffff;
   --border-color: #dee2e6;
+  --card-bg: #ffffff;
+  --input-bg: #ffffff;
+  --input-border: #ced4da;
 }
 
 :root[data-theme='dark'] {
@@ -16,9 +19,14 @@
   --text-secondary: #adb5bd;
   --text-white: #ffffff;
   --border-color: #495057;
+  --card-bg: #2d2d2d;
+  --input-bg: #1a1a1a;
+  --input-border: #495057;
 }
 
 body {
+  min-height: 100vh;
+  line-height: 1.5;
   background-color: var(--bg-primary);
   color: var(--text-primary);
   transition: background-color 0.3s ease, color 0.3s ease;
@@ -52,4 +60,135 @@ body {
 .theme-main {
   background-color: var(--bg-primary);
   color: var(--text-primary);
+}
+
+/* Card styling */
+.card {
+  background-color: var(--card-bg) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border-color) !important;
+}
+
+.card-header {
+  background-color: var(--bg-secondary) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border-color) !important;
+}
+
+.card-body {
+  background-color: var(--card-bg) !important;
+  color: var(--text-primary) !important;
+}
+
+/* Form controls */
+.form-control,
+.form-select {
+  background-color: var(--input-bg) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--input-border) !important;
+}
+
+.form-control:focus,
+.form-select:focus {
+  background-color: var(--input-bg) !important;
+  color: var(--text-primary) !important;
+  border-color: #80bdff !important;
+}
+
+.form-control::placeholder,
+input::placeholder,
+textarea::placeholder {
+  color: var(--text-secondary) !important;
+  opacity: 0.1;
+}
+
+/* Table styling */
+.table {
+  color: var(--text-primary) !important;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) {
+  --bs-table-accent-bg: var(--bg-secondary) !important;
+  color: var(--text-primary) !important;
+}
+
+.table-hover > tbody > tr:hover {
+  --bs-table-hover-bg: var(--bg-secondary) !important;
+  color: var(--text-primary) !important;
+}
+
+/* Alert styling */
+.alert {
+  border-color: var(--border-color) !important;
+}
+
+/* Text muted */
+.text-muted {
+  color: var(--text-secondary) !important;
+}
+
+/* Links */
+a {
+  color: var(--text-primary);
+}
+
+a:hover {
+  color: var(--text-secondary);
+}
+
+/* List items */
+ul li {
+  color: var(--text-primary);
+}
+
+/* Headers */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-primary) !important;
+}
+
+/* HR divider */
+hr {
+  border-color: var(--border-color) !important;
+  opacity: 0.5;
+}
+
+/* Modal */
+.modal-content {
+  background-color: var(--card-bg) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border-color) !important;
+}
+
+.modal-header {
+  background-color: var(--bg-secondary) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border-color) !important;
+}
+
+.modal-body {
+  background-color: var(--card-bg) !important;
+  color: var(--text-primary) !important;
+}
+
+.modal-footer {
+  background-color: var(--bg-secondary) !important;
+  border-color: var(--border-color) !important;
+}
+
+/* Form labels */
+.form-label {
+  color: var(--text-primary) !important;
+}
+
+/* Navbar styling */
+.navbar {
+  background-color: var(--bg-primary);
+}
+
+.navbar-list a {
+  color: var(--text-primary) !important;
+}
+
+.navbar-list a:hover {
+  color: var(--text-secondary) !important;
 }

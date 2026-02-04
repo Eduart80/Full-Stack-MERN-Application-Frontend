@@ -5,6 +5,9 @@ import Dashboard from "./Components/Dashboard/Dashboard";
 import HomePage from "./Page/HomePage/HomePage";
 import Project from "./Page/ProjectPage/ProjectPage";
 import TasksView from "./Page/TasksPage/TasksPage";
+import AllTasksPage from "./Page/AllTasksPage/AllTasksPage";
+import CompletedPage from "./Page/CompletedPage/CompletedPage";
+import SettingsPage from "./Page/SettingsPage/SettingsPage";
 import NotFound from "./Page/NotFound/NotFound";
 import Login from "./Page/Auth/Login";
 import SignUp from "./Page/Auth/SignUp";
@@ -14,7 +17,6 @@ function App() {
   return (
     <>
       <Routes>
-        {/* Dashboard Layout with nested routes */}
         <Route
           path="/"
           element={
@@ -26,6 +28,9 @@ function App() {
           <Route index element={<HomePage />} />
           <Route path="project" element={<Project />} />
           <Route path="/projects/:projectId/tasks" element={<TasksView />} />
+          <Route path="tasks" element={<AllTasksPage />} />
+          <Route path="setting" element={<SettingsPage />} />
+          <Route path="completed" element={<CompletedPage />} />
         </Route>
 
         {/* Auth routes */}

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Spinner from "../Spinner/Spinner";
-import { getAllTasks, type Task } from '../../API/TasksAPI'
+import { getAllTasks} from '../../API/TasksAPI'
+import type { Task } from "../../types";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import TaskModal from "../Modals/TaskModals";
@@ -22,7 +23,7 @@ export default function TasksView() {
     try {
       setLoading(true);
       setError(null);
-      console.log("projectId from params:", projectId);
+     
       if(!projectId) throw new Error("Project Id is missing")
        const data: Task[] = await getAllTasks(projectId);
       setTasks(data);
@@ -72,13 +73,13 @@ export default function TasksView() {
   }
 
   const handleTaskUpdated = () => {
-    setShowEditModal(false);
-    setEditingTask(null);
-    fetchTasks(); // Refresh tasks after update
+    setShowEditModal(false)
+    setEditingTask(null)
+    fetchTasks()
   }
 
   if (loading) {
-    return <Spinner />;
+    return <Spinner />
   }
 
   if (error) {

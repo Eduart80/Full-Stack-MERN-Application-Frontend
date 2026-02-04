@@ -36,10 +36,7 @@ ol[role='list'] {
 }
 
 /* Set core body defaults */
-body {
-  min-height: 100vh;
-  line-height: 1.5;
-}
+/* Body styles moved to theme.css for better theme management */
 
 /* Set shorter line heights on headings and interactive elements */
 h1,

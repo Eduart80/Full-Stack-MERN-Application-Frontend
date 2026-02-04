@@ -1,20 +1,20 @@
 
-Frontend Project Plan (MERN Stack)
+Frontend Project Plan
 ==================================
 
 1. Project Setup & Structure
 	- Initialize project with Vite + React + TypeScript
 	- Organize folders: components, pages, assets, services, hooks, utils
-	- Configure ESLint, Prettier, and TypeScript
+	- Configure TypeScript, dotenv, Bootstrap, axios
 
 2. UI/UX Design & Wireframes
 	- Define user flows and main screens
 	- Create wireframes or mockups with Figma
-	- Using Bootstrap
+	- Bootstrap
 
 3. Component Architecture
 	- Identify reusable components Button, Input, Modal
-	- Plan page-level components, Home, Dashboard, Profile, tasks, Completed
+	- Plan page-level components, Home, Dashboard, Profile, tasks, Completed, API
 	- Define props and state for each component
 
 4. State Management
@@ -23,7 +23,7 @@ Frontend Project Plan (MERN Stack)
 
 5. API Integration
 	- Set up Axios for HTTP requests
-	- Create service layer for API calls
+	- Create service layer (security) for API calls 
 	- Integrate with backend endpoints CRUD operations
 
 6. Routing
@@ -55,8 +55,21 @@ Frontend Project Plan (MERN Stack)
 ---
 Timeline
 ------------------------------
-Day 1: Setup, Design, and Component Scaffolding
-	   State Management, Routing, and API Integration
-Day 2: Authentication, Styling, and Testing
-	   Finalize Features, Bug Fixes, and Deployment
+### Planning front-end 
+- Day 1: Idea of the app, design, component<br>
+scaffolding design, setup project structure
+- Day 2: Building folder and structure based on requirement<br>
+Install all neccesery libraries. Start Coding
+- Day 3: Starting with App and chaining folders.<br>
+Page, Component, Api, type, utils
+- Day 4: Front & Back end working together. 
+<br>Deploy with Render
+
+ Notes & Additional Considerations
+---------------------------------
+- **Testing:** Even tests are not implemented, i will perform basic manual testing to ensure core features work as expected.
+- **Buffer Time:** Allocate some buffer time in the schedule to handle unexpected issues, bug fixes, or last-minute changes.
+- **Documentation:** Update the README and API documentation continuously as I develop the project to keep everything accurate and up to date.
+
+
 

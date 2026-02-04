@@ -10,6 +10,7 @@ interface CreateProjectModalProps {
   projectToEdit?: Project;
 }
 
+///////// PROJECT /////////
 export default function CreateProjectModal({
   show,
   onHide,
