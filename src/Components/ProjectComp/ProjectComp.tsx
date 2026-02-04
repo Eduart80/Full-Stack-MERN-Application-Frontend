@@ -85,11 +85,9 @@ export default function ProjectComp() {
                 <h5 className="card-title">Title {project.name}</h5>
                 <p className="card-text">Description: {project.description}</p>
                 <p className="card-text">Status: {project.status}</p>
-                {/* <small className="text-muted">
-                  Created: {new Date(project.createdAt).toLocaleDateString()}
-                </small> */}
+                
                 {project.createdAt && (
-                    <small className="text-muted d-block mb-2">
+                    <small className="text-body-secondary d-block mb-2">
                       Created: {new Date(project.createdAt).toLocaleDateString()}
                     </small>
                   )}

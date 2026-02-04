@@ -47,6 +47,15 @@ body {
 .text-white {
   color: var(--text-white) !important;
 }
+
+.text-body-secondary {
+  color: #999999 !important;
+}
+
+[data-theme='dark'] .text-body-secondary {
+  color: #cccccc !important;
+}
+
 .theme-container {
   background-color: var(--bg-secondary);
   color: var(--text-primary);

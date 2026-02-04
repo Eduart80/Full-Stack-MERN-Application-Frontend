@@ -5,6 +5,7 @@ import type { Task } from "../../types";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import TaskModal from "../Modals/TaskModals";
+import TaskPassFail from "./passFail";
 
 export default function TasksView() {
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -106,10 +107,14 @@ export default function TasksView() {
                     </span>
                   </p>
                   {task.createdAt && (
-                    <small className="text-muted d-block mb-2">
+                    <small className="text-body-secondary d-block mb-2">
                       Created: {new Date(task.createdAt).toLocaleDateString()}
                     </small>
                   )}
+                  <div className="d-flex gap-2">
+                    {/* Show Pass/Fail dropdown as an option for every task */}
+                    <TaskPassFail showOptions={true} />
+                  </div>
                   <div className="d-flex gap-2">
                     <button 
                       className="btn btn-sm btn-primary"

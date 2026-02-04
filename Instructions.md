@@ -40,3 +40,7 @@ Deploy the backend Express app as a Web Service on Render, connecting it to your
 Deploy the frontend React app as a Static Site on Render.
 Ensure your live frontend is correctly configured to communicate with your live backend.
 Presentation Prep: Prepare a short presentation (5-10 minutes) to demonstrate your live application. You should walk through the main features, explain your technical decisions, and discuss any challenges you faced.
+
+exapmle
+Feature: User Login
+Scenario: Successful login with valid credentials Given the user is on the login page When the user enters a valid email and password And clicks the "Login" button Then the user should be redirected to the dashboard And see "Welcome to your Dashboard" message
