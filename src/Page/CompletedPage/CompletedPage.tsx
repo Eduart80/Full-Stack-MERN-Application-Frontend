@@ -96,9 +96,6 @@ export default function CompletedPage() {
        </div>
       <div className="d-flex justify-content-between align-items-center mb-4">
         <h2>Completed Tasks</h2>
-        <Link to="/" className="btn btn-secondary">
-          Back to Dashboard
-        </Link>
       </div>
 
       {completedTasks.length === 0 ? (

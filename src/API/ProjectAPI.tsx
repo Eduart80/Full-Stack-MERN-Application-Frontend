@@ -17,6 +17,12 @@ apiClient.interceptors.request.use((config) => {
     return config;
 })
 
+export interface User {
+    _id: string;
+    username: string;
+    email: string;
+}
+
 export interface Project {
     _id: string;
     name: string;
@@ -26,6 +32,8 @@ export interface Project {
     endDate?: string;
     createdAt?: string;
     updatedAt?: string;
+    owner?: string | User;
+    collaborators?: User[];
 }
 //GET ALL
 export async function getAllProjects(){

@@ -64,7 +64,35 @@ body {
 .theme-sidebar {
   background-color: var(--bg-dark);
   color: var(--text-white);
+  transition: transform 0.3s ease-in-out;
+  min-height: 100vh;
 }
+
+/* menu Sidebar */
+@media (max-width: 767.98px) {
+  .theme-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1050;
+    transform: translateX(-100%);
+    max-width: 250px;
+    width: 250px;
+    height: 100vh;
+  }
+  
+  .theme-sidebar.sidebar-open {
+    transform: translateX(0);
+  }
+}
+
+@media (min-width: 768px) {
+  .theme-sidebar {
+    transform: none;
+    position: relative;
+  }
+}
+
 
 .theme-main {
   background-color: var(--bg-primary);

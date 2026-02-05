@@ -4,7 +4,8 @@ import Spinner from "../Spinner/Spinner";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import ProjectModal from "../Modals/Modals";
-import type {Project} from '../../API/ProjectAPI'
+import CollaborationModal from "../Modals/CollaborationModal";
+import type { Project } from '../../API/ProjectAPI'
 
 export default function ProjectComp() {
   const [projects, setProjects] = useState<Project[]>([])
@@ -12,6 +13,8 @@ export default function ProjectComp() {
   const [error, setError] = useState<string | null>(null)
   const [editingProject, setEditingProject] = useState<Project | null>(null)
   const [showEditModal, setShowEditModal] = useState(false)
+  const [collaboratingProject, setCollaboratingProject] = useState<Project | null>(null)
+  const [showCollabModal, setShowCollabModal] = useState(false)
 
 
   useEffect(() => {
@@ -66,6 +69,28 @@ export default function ProjectComp() {
     fetchProject();
   }
 
+  const handleManageCollaborators = (project: Project) => {
+    setCollaboratingProject(project);
+    setShowCollabModal(true);
+  }
+
+  const getCurrentUserId = () => {
+    const user = localStorage.getItem('user');
+    if (user) {
+      try {
+        return JSON.parse(user)._id;
+      } catch {
+        return null;
+      }
+    }
+    return null;
+  }
+
+  const isProjectOwner = (project: Project) => {
+    const currentUserId = getCurrentUserId();
+    return project.owner === currentUserId || (typeof project.owner === 'object' && project.owner?._id === currentUserId);
+  }
+
   if (loading) {
     return <Spinner />;
   }
@@ -77,50 +102,66 @@ export default function ProjectComp() {
     <div>
       <div className="row">
         {projects.map((project) => (
-          <div key={project._id} className="text-decoration-none text-dark">
-          <div className="col-md-7 mb-3">
+          <div key={project._id} className="col-md-7 mb-3">
             <div className="card">
               <div className="card-body">
-                <h5 className="card-title">Title {project.name}</h5>
+                <h5 className="card-title">Title: {project.name}</h5>
                 <p className="card-text">Description: {project.description}</p>
                 <p className="card-text">Status: {project.status}</p>
+                {/* Show collaborators */}
+                {project.collaborators && project.collaborators.length > 0 && (
+                  <p className="card-text">
+                    <small className="text-muted">
+                      <i className="bi bi-people me-1"></i>
+                      {project.collaborators.length} collaborator{project.collaborators.length !== 1 ? 's' : ''}
+                    </small>
+                  </p>
+                )}
                 
-                
-                  <div className="d-flex gap-2 flex-wrap">
-                    <Link
-                      to={`/projects/${project._id}/tasks`}
-                      className="btn btn-sm btn-primary"
-                    >
-                      <i className="bi bi-list-task me-1"></i>
-                      View Tasks
-                    </Link>
-                    <button 
+                <div className="d-flex gap-2 flex-wrap">
+                  <Link
+                    to={`/projects/${project._id}/tasks`}
+                    className="btn btn-sm btn-primary"
+                  >
+                    <i className="bi bi-list-task me-1"></i>
+                    View Tasks
+                  </Link>
+                  <button 
+                    className="btn btn-sm btn-info"
+                    onClick={() => handleManageCollaborators(project)}
+                  >
+                    <i className="bi bi-people me-1"></i>
+                    Collaborators
+                  </button>
+                  {isProjectOwner(project) && (
+                    <>
+                      <button 
                         className="btn btn-sm btn-secondary"
                         onClick={() => handleEdit(project)}
-                        >
+                      >
                         <i className="bi bi-pencil me-1"></i>
                         Edit
                       </button>
                       <button 
                         className="btn btn-sm btn-danger"
                         onClick={() => handleDelete(project._id)}
-                        >
+                      >
                         <i className="bi bi-trash me-1"></i>
                         Delete
-                    </button>
-                  </div>
-                  {project.createdAt && (
-                    <small className="text-body-secondary d-block mb-2 mt-2">
-                      Created: {new Date(project.createdAt).toLocaleDateString()}
-                    </small>
+                      </button>
+                    </>
                   )}
+                </div>
+                {project.createdAt && (
+                  <small className="text-body-secondary d-block mb-2 mt-2">
+                    Created: {new Date(project.createdAt).toLocaleDateString()}
+                  </small>
+                )}
               </div>
             </div>
           </div>
-          </div>
         ))}
       </div>
-
       {/* Edit Modal */}
       {showEditModal && editingProject && (
         <ProjectModal
@@ -132,6 +173,22 @@ export default function ProjectComp() {
           onProjectCreated={handleProjectUpdated}
           editMode={true}
           projectToEdit={editingProject}
+        />
+      )}
+
+      {/* Collaboration Modal */}
+      {showCollabModal && collaboratingProject && (
+        <CollaborationModal
+          show={showCollabModal}
+          onHide={() => {
+            setShowCollabModal(false);
+            setCollaboratingProject(null);
+          }}
+          projectId={collaboratingProject._id}
+          projectName={collaboratingProject.name}
+          collaborators={collaboratingProject.collaborators || []}
+          isOwner={isProjectOwner(collaboratingProject)}
+          onCollaboratorAdded={fetchProject}
         />
       )}
     </div>

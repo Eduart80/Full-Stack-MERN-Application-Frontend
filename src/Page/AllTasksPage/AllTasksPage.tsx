@@ -108,9 +108,6 @@ export default function AllTasksPage() {
        </div>
       <div className="d-flex justify-content-between align-items-center mb-4">
         <h2>All Tasks</h2>
-        <Link to="/" className="btn btn-secondary">
-          Back to Dashboard
-        </Link>
       </div>
 
       {allTasks.length === 0 ? (

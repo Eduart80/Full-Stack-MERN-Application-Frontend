@@ -11,6 +11,12 @@ export interface Task {
   projectId?: string;
 }
 
+export interface User {
+  _id: string;
+  username: string;
+  email: string;
+}
+
 export interface Project {
   _id: string;
   name: string;
@@ -18,7 +24,9 @@ export interface Project {
   status?: string;
   startDate?: string;
   endDate?: string;
-  tasks?: Task[]; // Add this line
+  tasks?: Task[];
+  owner?: string | User;
+  collaborators?: User[];
   createdAt?: string;
   updatedAt?: string;
 }
